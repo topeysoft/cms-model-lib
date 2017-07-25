@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 class Attribute {
     constructor() {
-        this.enabled = true;
+        this.disabled = false;
     }
 }
 exports.Attribute = Attribute;

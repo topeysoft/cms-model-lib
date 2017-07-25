@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 class GridDefinitionItem {
     constructor() {
         this.size = 12;
-        this.visible = true;
+        this.hidden = true;
     }
 }
 exports.GridDefinitionItem = GridDefinitionItem;
