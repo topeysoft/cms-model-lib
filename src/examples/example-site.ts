@@ -27,13 +27,12 @@ export const exampleSite: SiteApp = {
             enabled: true,
             tag_name: 'meta', attributes: [
                 {
-                    enabled: true,
+                    disabled: false,
                     key: "http-equiv",
                     value: "X-UA-Compatible"
 
                 },
                 {
-                    enabled: true,
                     key: "content",
                     value: "IE=edge"
 

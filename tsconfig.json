@@ -20,8 +20,6 @@
     ],
     "exclude": [
         "tests/**/*",
-        "ota-portal/**/*",
-        "src/frontend/**/*",
         "node_modules",
         "**/*.spec.ts",
         "**/*test.ts",
