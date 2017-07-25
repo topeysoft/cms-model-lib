@@ -13,7 +13,7 @@ export const exampleWidget3: Widget = {
     grid_definition: {
         xs: {
             size: 12,
-            hidden: true
+            hidden: false
         },
         md: {
             size: 8,

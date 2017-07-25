@@ -14,7 +14,7 @@ exports.exampleWidget3 = {
     grid_definition: {
         xs: {
             size: 12,
-            hidden: true
+            hidden: false
         },
         md: {
             size: 8,
