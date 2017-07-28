@@ -81,7 +81,7 @@ export class ContentBuilder {
     keys.forEach(key => {
       const attr = def[key];
       const visibility = attr.hidden ? ` hidden-${key} ` : ``;
-      gridClasses += `col-${key}-${attr.size} ${visibility}`;
+      gridClasses += `vc-${key}-${attr.size} ${visibility}`;
     });
     return gridClasses;
   }
