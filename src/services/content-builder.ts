@@ -93,11 +93,11 @@ export class ContentBuilder {
       widget.tag_name = widget.tag_name || "div";
       let attr = ContentBuilder.buildAttributes(widget.attributes);
       if (!attr.includes('class="')) {
-        attr += 'class=""';
+        attr += ' class="" ';
       }
       attr = attr.replace(
         'class="',
-        `${ContentBuilder.buildWidgetGridAttributes(widget)} `
+        `class="${ContentBuilder.buildWidgetGridAttributes(widget)} `
       );
       content += `<${widget.tag_name} ${attr}>${widget.content}</${widget.tag_name}>`;
     });
