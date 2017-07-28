@@ -5,6 +5,7 @@ export { Widget } from "./widget";
 export { Theme } from "./theme";
 export { Template } from "./template";
 export { Page } from "./page";
+export { ContentData } from "./content-data";
 
 // Sub-models
 export { Attribute } from "./sub-models/attribute";
