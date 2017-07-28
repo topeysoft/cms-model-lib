@@ -6,7 +6,7 @@ export const exampleWidget2: Widget = {
     display_name: "Body Text",
     unique_name: "body-text",
     attributes:[
-        {disabled:false, key:"class", value:"text-primary"}
+        {enabled:true, key:"class", value:"text-primary"}
     ],
     grid_definition:{
         xs:{
