@@ -62,7 +62,7 @@ export class ContentBuilder {
   static buildTagElements(tags) {
     let tagString = "";
     tags.forEach(item => {
-      if(item.tag_name){ return}
+      if(!item.tag_name){ return}
       let str = `<${item.tag_name} ${ContentBuilder.buildAttributes(
         item.attributes
       )}>`;
