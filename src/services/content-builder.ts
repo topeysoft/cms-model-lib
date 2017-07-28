@@ -6,7 +6,7 @@ import { Widget } from "../widget";
 
 export class ContentBuilder {
   constructor() {}
-  buildPreview(data: ContentData) {
+  static buildPreview(data: ContentData) {
     data.site_info = data.site_info || new SiteApp;
     data.page = data.page || new Page;
     data.theme = data.theme || new Theme;
@@ -16,16 +16,16 @@ export class ContentBuilder {
     data.site_info.metadata = data.site_info.metadata || [];
     data.page.metadata = data.page.metadata || [];
 
-    const styles = this.buildTagElements(
+    const styles = ContentBuilder.buildTagElements(
       data.theme.styles.concat(data.page.styles)
     );
-    const metadata = this.buildTagElements(
+    const metadata = ContentBuilder.buildTagElements(
       data.theme.metadata.concat(data.page.metadata).concat(data.site_info.metadata)
     );
-    const scripts = this.buildTagElements(
+    const scripts = ContentBuilder.buildTagElements(
       data.theme.scripts.concat(data.page.scripts)
     );
-    const bodyContent = this.buildWidgets(data.page.widgets);
+    const bodyContent = ContentBuilder.buildWidgets(data.page.widgets);
 
     const content = `<html>
       <head>
@@ -41,7 +41,7 @@ export class ContentBuilder {
     return content;
   }
 
-  buildAttributes(attributes) {
+  static  buildAttributes(attributes) {
     attributes = attributes || [];
     let str = "";
     attributes.forEach(attr => {
@@ -51,10 +51,10 @@ export class ContentBuilder {
     });
     return str;
   }
-  buildTagElements(tags) {
+  static   buildTagElements(tags) {
     let tagString = "";
     tags.forEach(item => {
-      let str = `<${item.tag_name} ${this.buildAttributes(item.attributes)}>`;
+      let str = `<${item.tag_name} ${ContentBuilder.buildAttributes(item.attributes)}>`;
       if (!item.self_closing || item.content) {
         str += `${item.content}</${item.tag_name}>`;
       }
@@ -62,7 +62,7 @@ export class ContentBuilder {
     });
     return tagString;
   }
-  buildWidgetGridAttributes(widget) {
+  static   buildWidgetGridAttributes(widget) {
     widget = widget || {};
     const def = widget.grid_definition;
     const keys = Object.keys(def);
@@ -75,19 +75,19 @@ export class ContentBuilder {
     return gridClasses;
   }
 
-  buildWidgets(widgets: Widget[]) {
+  static  buildWidgets(widgets: Widget[]) {
     widgets = widgets || [];
     let content = ``;
     widgets.forEach(widget => {
-      let attr = this.buildAttributes(widget.attributes);
+      let attr = ContentBuilder.buildAttributes(widget.attributes);
       if (!attr.includes('class="')) {
         attr += 'class=""';
       }
       attr = attr.replace(
         'class="',
-        `${this.buildWidgetGridAttributes(widget)} `
+        `${ContentBuilder.buildWidgetGridAttributes(widget)} `
       );
-      content += `<${widget.tag_name} ${this.buildAttributes(
+      content += `<${widget.tag_name} ${ContentBuilder.buildAttributes(
         widget.attributes
       )}>${widget.content}</${widget.tag_name}>`;
     });
