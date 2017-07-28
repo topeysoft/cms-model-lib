@@ -81,6 +81,18 @@ export class ContentBuilder {
     keys.forEach(key => {
       const attr = def[key];
       const visibility = attr.hidden ? ` hidden-${key} ` : ``;
+      gridClasses += `col-${key}-${attr.size} ${visibility}`;
+    });
+    return gridClasses;
+  }
+  static buildVisuaWidgetGridAttributes(widget) {
+    widget = widget || {};
+    const def = widget.grid_definition;
+    const keys = Object.keys(def);
+    let gridClasses = "";
+    keys.forEach(key => {
+      const attr = def[key];
+      const visibility = attr.hidden ? ` vc-hidden-${key} ` : ``;
       gridClasses += `vc-${key}-${attr.size} ${visibility}`;
     });
     return gridClasses;
