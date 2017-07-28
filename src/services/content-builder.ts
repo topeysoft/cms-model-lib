@@ -15,6 +15,7 @@ export class ContentBuilder {
     data.page.styles = data.page.styles || [];
     data.site_info.metadata = data.site_info.metadata || [];
     data.page.metadata = data.page.metadata || [];
+    data.theme.metadata = data.theme.metadata || [];
 
     const styles = ContentBuilder.buildTagElements(
       data.theme.styles.concat(data.page.styles)
