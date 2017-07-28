@@ -99,9 +99,7 @@ export class ContentBuilder {
         'class="',
         `${ContentBuilder.buildWidgetGridAttributes(widget)} `
       );
-      content += `<${widget.tag_name} ${ContentBuilder.buildAttributes(
-        widget.attributes
-      )}>${widget.content}</${widget.tag_name}>`;
+      content += `<${widget.tag_name} ${attr}>${widget.content}</${widget.tag_name}>`;
     });
     return content;
   }
