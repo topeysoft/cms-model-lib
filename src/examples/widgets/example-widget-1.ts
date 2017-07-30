@@ -8,14 +8,5 @@ export const exampleWidget1: Widget = {
     attributes:[
         {enabled:false, key:"class", value:"text-danger"}
     ],
-    grid_definition:{
-        xs:{
-            size:10,
-            hidden:false
-        },
-        lg:{
-            size:4,
-            hidden:false
-        }
-    }
+    
 }

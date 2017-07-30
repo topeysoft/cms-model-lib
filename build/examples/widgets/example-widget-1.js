@@ -9,15 +9,5 @@ exports.exampleWidget1 = {
     attributes: [
         { enabled: false, key: "class", value: "text-danger" }
     ],
-    grid_definition: {
-        xs: {
-            size: 10,
-            hidden: false
-        },
-        lg: {
-            size: 4,
-            hidden: false
-        }
-    }
 };
 //# sourceMappingURL=example-widget-1.js.map

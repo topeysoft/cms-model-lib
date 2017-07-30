@@ -4,6 +4,7 @@ import { Page } from "./../page";
 import { SiteApp } from "./../site-app";
 import { ContentData } from "./../content-data";
 import { Widget } from "../widget";
+import { WidgetItem } from "../widget-item";
 
 export class ContentBuilder {
   constructor() {}
@@ -99,10 +100,11 @@ export class ContentBuilder {
     return gridClasses;
   }
 
-  static buildWidgets(widgets: Widget[]) {
-    widgets = widgets || [];
+  static buildWidgets(widgetItems: WidgetItem[]) {
+    widgetItems = widgetItems || [];
     let content = ``;
-    widgets.forEach(widget => {
+    widgetItems.forEach(widgetItem => {
+      const widget = widgetItem.widget;
       widget.tag_name = widget.tag_name || "div";
       let attr = ContentBuilder.buildAttributes(widget.attributes);
       if (!attr.includes('class="')) {

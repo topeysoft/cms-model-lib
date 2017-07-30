@@ -1,3 +1,4 @@
+import { WidgetItem } from './widget-item';
 import { BaseModel } from "./base";
 import { TagElement } from "./sub-models/tag-element";
 import { StyleElement } from "./sub-models/style-element";
@@ -8,5 +9,5 @@ export class Page extends BaseModel {
     metadata: TagElement[];
     styles: StyleElement[];
     scripts: ScriptElement[];
-    widgets: Widget[];
+    widgets: WidgetItem[];
 }
