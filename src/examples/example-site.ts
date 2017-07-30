@@ -27,7 +27,7 @@ export const exampleSite: SiteApp = {
             enabled: true,
             tag_name: 'meta', attributes: [
                 {
-                    disabled: false,
+                    enabled: true,
                     key: "http-equiv",
                     value: "X-UA-Compatible"
 

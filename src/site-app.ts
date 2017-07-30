@@ -7,8 +7,8 @@ import { Theme } from "./theme";
 export class SiteApp extends BaseModel {
     base_url: string;
     title: string;
-    metadata: TagElement[];
-    scripts: ScriptElement[];
+    metadata?: TagElement[] = [];
+    scripts?: ScriptElement[] = [];
     theme:Theme;
     pages: Page[]
 }
