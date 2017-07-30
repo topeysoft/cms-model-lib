@@ -1,3 +1,4 @@
+import { GridDefinition } from './../sub-models/grid-definition';
 import { Theme } from "./../theme";
 import { Page } from "./../page";
 import { SiteApp } from "./../site-app";
@@ -75,7 +76,7 @@ export class ContentBuilder {
   }
   static buildWidgetGridAttributes(widget) {
     widget = widget || {};
-    const def = widget.grid_definition;
+    const def = widget.grid_definition|| new GridDefinition;
     const keys = Object.keys(def);
     let gridClasses = "";
     keys.forEach(key => {
@@ -85,9 +86,9 @@ export class ContentBuilder {
     });
     return gridClasses;
   }
-  static buildVisuaWidgetGridAttributes(widget) {
+  static buildVisualWidgetGridAttributes(widget) {
     widget = widget || {};
-    const def = widget.grid_definition;
+    const def = widget.grid_definition|| new GridDefinition;
     const keys = Object.keys(def);
     let gridClasses = "";
     keys.forEach(key => {
