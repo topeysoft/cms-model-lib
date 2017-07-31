@@ -1,10 +1,10 @@
+import { WidgetDefinition } from './../widget-definition';
 import { GridDefinition } from './../sub-models/grid-definition';
 import { Theme } from "./../theme";
 import { Page } from "./../page";
 import { SiteApp } from "./../site-app";
 import { ContentData } from "./../content-data";
 import { Widget } from "../widget";
-import { WidgetItem } from "../widget-item";
 
 export class ContentBuilder {
   constructor() {}
@@ -100,7 +100,7 @@ export class ContentBuilder {
     return gridClasses;
   }
 
-  static buildWidgets(widgetItems: WidgetItem[]) {
+  static buildWidgets(widgetItems: WidgetDefinition[]) {
     widgetItems = widgetItems || [];
     let content = ``;
     widgetItems.forEach(widgetItem => {
