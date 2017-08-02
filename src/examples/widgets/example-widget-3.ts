@@ -10,15 +10,6 @@ export const exampleWidget3: Widget = {
             key: 'class', value: "main-header"
         },
     ],
-    grid_definition: {
-        xs: {
-            size: 12,
-            hidden: false
-        },
-        md: {
-            size: 8,
-            hidden: true
-        }
-    }
+    
 
 }

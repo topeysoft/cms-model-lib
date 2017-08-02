@@ -7,17 +7,7 @@ exports.exampleWidget1 = {
     display_name: "Left menu",
     unique_name: "left-menu",
     attributes: [
-        { disabled: false, key: "class", value: "text-danger" }
+        { enabled: false, key: "class", value: "text-danger" }
     ],
-    grid_definition: {
-        xs: {
-            size: 10,
-            hidden: false
-        },
-        lg: {
-            size: 4,
-            hidden: false
-        }
-    }
 };
 //# sourceMappingURL=example-widget-1.js.map

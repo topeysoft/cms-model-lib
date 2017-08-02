@@ -8,13 +8,49 @@ exports.examplePage1 = {
     _id: "ea54ed32ade23322323232",
     display_name: "Homepage",
     unique_name: "homepage",
-    metadata: [new index_1.TagElement],
-    styles: [new index_1.StyleElement],
-    scripts: [new index_1.ScriptElement],
+    metadata: [new index_1.TagElement()],
+    styles: [new index_1.StyleElement()],
+    scripts: [new index_1.ScriptElement()],
     widgets: [
-        example_widget_1_1.exampleWidget1,
-        example_widget_2_1.exampleWidget2,
-        example_widget_3_1.exampleWidget3,
+        {
+            grid_definition: {
+                xs: {
+                    size: 10,
+                    hidden: false
+                },
+                lg: {
+                    size: 4,
+                    hidden: false
+                }
+            },
+            widget: example_widget_1_1.exampleWidget1
+        },
+        {
+            grid_definition: {
+                xs: {
+                    size: 12,
+                    hidden: false
+                },
+                lg: {
+                    size: 8,
+                    hidden: false
+                }
+            },
+            widget: example_widget_2_1.exampleWidget2
+        },
+        {
+            grid_definition: {
+                xs: {
+                    size: 12,
+                    hidden: false
+                },
+                md: {
+                    size: 8,
+                    hidden: true
+                }
+            },
+            widget: example_widget_3_1.exampleWidget3
+        }
     ]
 };
 //# sourceMappingURL=example-page-1.js.map

@@ -1,9 +1,9 @@
 import { BaseModel } from "./base";
 import { Attribute } from "./sub-models/attribute";
 import { GridDefinition } from "./sub-models/grid-definition";
+import { Widget } from "./widget";
 
-export class Widget extends BaseModel {
-    content: string;
-    tag_name: string;
-    attributes: Attribute[];
+export class WidgetDefinition {
+    grid_definition?: GridDefinition;
+    widget?: Widget;
 }
