@@ -5,5 +5,11 @@ import { Widget } from "./widget";
 
 export class WidgetDefinition {
     grid_definition?: GridDefinition;
+    attributes?: Attribute[];
+    backgroundImage?: string;
+    backgroundColor?: string;
+    border?:string;
+    margin?:string;
+    padding?:string;
     widget?: Widget;
 }

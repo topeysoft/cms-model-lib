@@ -9,6 +9,7 @@ export { ContentData } from "./content-data";
 
 // Sub-models
 export { GridDefinition } from "./sub-models/grid-definition";
+export { WidgetDefinition } from './widget-definition';
 export { GridDefinitionItem } from "./sub-models/grid-definition-item";
 export { Attribute } from "./sub-models/attribute";
 export { TagElement } from "./sub-models/tag-element";
