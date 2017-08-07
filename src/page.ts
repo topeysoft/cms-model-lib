@@ -9,5 +9,5 @@ export class Page extends BaseModel {
     metadata: TagElement[];
     styles: StyleElement[];
     scripts: ScriptElement[];
-    widgets: WidgetDefinition[];
+    widget_definitions: WidgetDefinition[];
 }
