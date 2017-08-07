@@ -11,7 +11,7 @@ exports.examplePage1 = {
     metadata: [new index_1.TagElement()],
     styles: [new index_1.StyleElement()],
     scripts: [new index_1.ScriptElement()],
-    widgets: [
+    widget_definitions: [
         {
             grid_definition: {
                 xs: {

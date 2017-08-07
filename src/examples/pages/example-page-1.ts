@@ -10,7 +10,7 @@ export const examplePage1: Page = {
   metadata: [new TagElement()],
   styles: [new StyleElement()],
   scripts: [new ScriptElement()],
-  widgets: [
+  widget_definitions: [
     {
       grid_definition: {
         xs: {

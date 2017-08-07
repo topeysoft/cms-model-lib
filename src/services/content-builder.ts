@@ -35,7 +35,7 @@ export class ContentBuilder {
     const scripts = ContentBuilder.buildTagElements(
       data.theme.scripts.concat(data.page.scripts)
     );
-    const bodyContent = ContentBuilder.buildWidgets(data.page.widgets);
+    const bodyContent = ContentBuilder.buildWidgets(data.page.widget_definitions);
 
     const content = `<html>
       <head>

@@ -11,3 +11,4 @@ export class Page extends BaseModel {
     scripts: ScriptElement[];
     widget_definitions: WidgetDefinition[];
 }
+
