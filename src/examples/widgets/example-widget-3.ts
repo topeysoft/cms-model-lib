@@ -1,6 +1,7 @@
 import { Widget } from './../../widget';
 export const exampleWidget3: Widget = {
     _id: "23124235edaed2332daae",
+    project_id:"",
     tag_name: "header",
     display_name: 'Header widget',
     unique_name: 'header_widget',

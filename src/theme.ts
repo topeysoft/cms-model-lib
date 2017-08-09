@@ -5,8 +5,9 @@ import { ScriptElement } from "./sub-models/script-element";
 import { Template } from "./template";
 
 export class Theme extends BaseModel {
-    metadata: TagElement[];
-    styles: StyleElement[];
-    scripts: ScriptElement[];
-    templates:Template[];
+  metadata: TagElement[];
+  styles: StyleElement[];
+  scripts: ScriptElement[];
+  templates: Template[];
+  project_id: string;
 }

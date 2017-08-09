@@ -6,6 +6,7 @@ import { ScriptElement } from "./sub-models/script-element";
 import { Widget } from "./widget";
 
 export class Page extends BaseModel {
+    project_id:string;
     metadata: TagElement[];
     styles: StyleElement[];
     scripts: ScriptElement[];

@@ -6,6 +6,7 @@ const example_widget_2_1 = require("../widgets/example-widget-2");
 const example_widget_1_1 = require("../widgets/example-widget-1");
 exports.examplePage1 = {
     _id: "ea54ed32ade23322323232",
+    project_id: "123efe345",
     display_name: "Homepage",
     unique_name: "homepage",
     metadata: [new index_1.TagElement()],

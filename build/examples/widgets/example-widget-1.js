@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.exampleWidget1 = {
     _id: 'widget1',
+    project_id: "",
     content: "<p>Hello</p>",
     tag_name: 'aside',
     display_name: "Left menu",

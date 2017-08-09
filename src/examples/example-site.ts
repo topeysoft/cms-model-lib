@@ -13,6 +13,7 @@ export const exampleSite: SiteApp = {
     unique_name: "official_website",
     theme: {
         _id: "",
+        project_id:"",
         display_name: "Default Theme",
         unique_name: "default_theme",
         styles: [],

@@ -7,4 +7,5 @@ export class Template extends BaseModel {
     metadata: TagElement[];
     styles: StyleElement[];
     scripts: ScriptElement[];
+    project_id: string;
 }

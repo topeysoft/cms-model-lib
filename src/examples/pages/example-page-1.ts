@@ -5,6 +5,7 @@ import { exampleWidget1 } from "../widgets/example-widget-1";
 
 export const examplePage1: Page = {
   _id: "ea54ed32ade23322323232",
+  project_id: "123efe345",
   display_name: "Homepage",
   unique_name: "homepage",
   metadata: [new TagElement()],
