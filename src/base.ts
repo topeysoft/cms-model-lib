@@ -3,4 +3,5 @@ export class BaseModel{
     display_name:string;
     unique_name:string;
     extra_data?:object;
+    draft?:any;
 }
