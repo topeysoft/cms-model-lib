@@ -12,4 +12,5 @@ export class WidgetDefinition {
     margin?:string;
     padding?:string;
     widget?: Widget;
+    unique_name?: string;
 }
