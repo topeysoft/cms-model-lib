@@ -35,7 +35,7 @@ export class ContentBuilder {
     const scripts = ContentBuilder.buildTagElements(
       data.theme.scripts.concat(data.page.scripts)
     );
-    const bodyContent = ContentBuilder.buildWidgets(data.page.widget_definitions);
+    const bodyContent = ContentBuilder.buildWidgets(data.page.widget_definitions, data.is_draft);
 
     const content = `<html>
       <head>
@@ -100,12 +100,15 @@ export class ContentBuilder {
     return gridClasses;
   }
 
-  static buildWidgets(widgetItems: WidgetDefinition[]) {
+  static buildWidgets(widgetItems: WidgetDefinition[], fromDraft?:boolean) {
     widgetItems = widgetItems || [];
     let content = ``;
     widgetItems.forEach(widgetItem => {
       widgetItem.widget = widgetItem.widget || new Widget;
-      const widget = widgetItem.widget.draft  || widgetItem.widget;
+    let widget = widgetItem.widget;
+    if(fromDraft){
+      widget = widgetItem.widget.draft  || widgetItem.widget;
+    }
       widget.tag_name = widget.tag_name || "div";
       let attr = ContentBuilder.buildAttributes(widget.attributes);
       if (!attr.includes('class="')) {

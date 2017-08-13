@@ -8,4 +8,5 @@ export class ContentData extends BaseModel {
   site_info: SiteApp;
   theme: Theme;
   page: Page;
+  is_draft?: boolean;
 }
