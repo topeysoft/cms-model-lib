@@ -4,6 +4,7 @@ const grid_definition_1 = require("./../sub-models/grid-definition");
 const theme_1 = require("./../theme");
 const page_1 = require("./../page");
 const site_app_1 = require("./../site-app");
+const widget_1 = require("../widget");
 class ContentBuilder {
     constructor() { }
     static buildPreview(data) {
@@ -89,7 +90,8 @@ class ContentBuilder {
         widgetItems = widgetItems || [];
         let content = ``;
         widgetItems.forEach(widgetItem => {
-            const widget = widgetItem.widget;
+            widgetItem.widget = widgetItem.widget || new widget_1.Widget;
+            const widget = widgetItem.widget.draft || widgetItem.widget;
             widget.tag_name = widget.tag_name || "div";
             let attr = ContentBuilder.buildAttributes(widget.attributes);
             if (!attr.includes('class="')) {

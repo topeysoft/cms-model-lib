@@ -104,7 +104,8 @@ export class ContentBuilder {
     widgetItems = widgetItems || [];
     let content = ``;
     widgetItems.forEach(widgetItem => {
-      const widget = widgetItem.widget;
+      widgetItem.widget = widgetItem.widget || new Widget;
+      const widget = widgetItem.widget.draft  || widgetItem.widget;
       widget.tag_name = widget.tag_name || "div";
       let attr = ContentBuilder.buildAttributes(widget.attributes);
       if (!attr.includes('class="')) {
