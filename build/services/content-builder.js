@@ -24,7 +24,7 @@ class ContentBuilder {
             .concat(data.page.metadata)
             .concat(data.site_info.metadata));
         const scripts = ContentBuilder.buildTagElements(data.theme.scripts.concat(data.page.scripts));
-        const bodyContent = ContentBuilder.buildWidgets(data.page.widget_definitions, data.is_draft);
+        const bodyContent = ContentBuilder.buildSections(data.page.sections, data.is_draft);
         const content = `<html>
       <head>
       <title>Test</title>
@@ -62,15 +62,15 @@ class ContentBuilder {
         });
         return tagString;
     }
-    static buildWidgetGridAttributes(widget) {
-        widget = widget || {};
-        const def = widget.grid_definition || new grid_definition_1.GridDefinition;
+    static buildWidgetGridAttributes(widgetDef) {
+        widgetDef = widgetDef || {};
+        const def = widgetDef.grid_definition || new grid_definition_1.GridDefinition;
         const keys = Object.keys(def);
         let gridClasses = "";
         keys.forEach(key => {
             const attr = def[key];
-            const visibility = attr.hidden ? ` hidden-${key} ` : ``;
-            gridClasses += `col-${key}-${attr.size} ${visibility}`;
+            const visibility = attr.hidden ? ` hidden-${key} ` : ` `;
+            gridClasses += ` col-${key}-${attr.size} ${visibility}`;
         });
         return gridClasses;
     }
@@ -86,22 +86,36 @@ class ContentBuilder {
         });
         return gridClasses;
     }
-    static buildWidgets(widgetItems, fromDraft) {
-        widgetItems = widgetItems || [];
+    static buildWidgets(widgetDefs, fromDraft) {
+        widgetDefs = widgetDefs || [];
         let content = ``;
-        widgetItems.forEach(widgetItem => {
-            widgetItem.widget = widgetItem.widget || new widget_1.Widget;
-            let widget = widgetItem.widget;
+        widgetDefs.forEach(widgetDef => {
+            widgetDef.widget = widgetDef.widget || new widget_1.Widget;
+            let widget = widgetDef.widget;
             if (fromDraft) {
-                widget = widgetItem.widget.draft || widgetItem.widget;
+                widget = widgetDef.widget.draft || new widget_1.Widget;
             }
             widget.tag_name = widget.tag_name || "div";
-            let attr = ContentBuilder.buildAttributes(widget.attributes);
+            let attr = ContentBuilder.buildAttributes(widgetDef.attributes);
             if (!attr.includes('class="')) {
                 attr += ' class="" ';
             }
-            attr = attr.replace('class="', `class="${ContentBuilder.buildWidgetGridAttributes(widget)} `);
+            attr = attr.replace('class="', `class="${ContentBuilder.buildWidgetGridAttributes(widgetDef)} `);
             content += `<${widget.tag_name} ${attr}>${widget.content}</${widget.tag_name}>`;
+        });
+        return content;
+    }
+    static buildSections(sections, fromDraft) {
+        sections = sections || [];
+        let content = ``;
+        sections.forEach(section => {
+            section.tag_name = section.tag_name || "section";
+            let widgetContent = '';
+            let attr = ContentBuilder.buildAttributes(section.attributes);
+            if (section.widget_definitions) {
+                widgetContent = this.buildWidgets(section.widget_definitions, fromDraft);
+            }
+            content += `<${section.tag_name} ${attr}>${widgetContent}</${section.tag_name}>`;
         });
         return content;
     }

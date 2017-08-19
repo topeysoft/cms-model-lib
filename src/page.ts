@@ -1,3 +1,4 @@
+import { Section } from './section';
 import { WidgetDefinition } from './widget-definition';
 import { BaseModel } from "./base";
 import { TagElement } from "./sub-models/tag-element";
@@ -10,6 +11,6 @@ export class Page extends BaseModel {
     metadata: TagElement[];
     styles: StyleElement[];
     scripts: ScriptElement[];
-    widget_definitions: WidgetDefinition[];
+    sections: Section[];
 }
 
