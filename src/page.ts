@@ -9,6 +9,8 @@ import { Widget } from "./widget";
 
 export class Page extends BaseModel {
     project_id:string;
+    title: string;
+    uri: string;
     attributes: Attribute[];
     metadata: TagElement[];
     styles: StyleElement[];
