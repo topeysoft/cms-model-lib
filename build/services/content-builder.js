@@ -25,18 +25,24 @@ class ContentBuilder {
             .concat(data.site_info.metadata));
         const scripts = ContentBuilder.buildTagElements(data.theme.scripts.concat(data.page.scripts));
         const bodyContent = ContentBuilder.buildSections(data.page.sections, data.is_draft);
+        let title = this.buildTitle(data);
+        let bodyTagAttributes = this.buildAttributes(data.page.attributes);
         const content = `<html>
       <head>
-      <title>Test</title>
+      ${title}
       ${metadata}
       ${styles}
       </head>
-      <body>
+      <body ${bodyTagAttributes}>
       ${bodyContent}
       </body>
       ${scripts}
       </html>`;
         return content;
+    }
+    static buildTitle(data) {
+        let title = `${data.page.title} | ${data.site_info.title}`;
+        return `<title>${title}</title>`;
     }
     static buildAttributes(attributes) {
         attributes = attributes || [];
@@ -64,7 +70,7 @@ class ContentBuilder {
     }
     static buildWidgetGridAttributes(widgetDef) {
         widgetDef = widgetDef || {};
-        const def = widgetDef.grid_definition || new grid_definition_1.GridDefinition;
+        const def = widgetDef.grid_definition || new grid_definition_1.GridDefinition();
         const keys = Object.keys(def);
         let gridClasses = "";
         keys.forEach(key => {
@@ -76,7 +82,7 @@ class ContentBuilder {
     }
     static buildVisualWidgetGridAttributes(widget) {
         widget = widget || {};
-        const def = widget.grid_definition || new grid_definition_1.GridDefinition;
+        const def = widget.grid_definition || new grid_definition_1.GridDefinition();
         const keys = Object.keys(def);
         let gridClasses = "";
         keys.forEach(key => {
@@ -90,10 +96,11 @@ class ContentBuilder {
         widgetDefs = widgetDefs || [];
         let content = ``;
         widgetDefs.forEach(widgetDef => {
-            widgetDef.widget = widgetDef.widget || new widget_1.Widget;
+            widgetDef.widget = widgetDef.widget || new widget_1.Widget();
             let widget = widgetDef.widget;
+            console.log(widgetDef.widget);
             if (fromDraft) {
-                widget = widgetDef.widget.draft || new widget_1.Widget;
+                widget = widgetDef.widget.draft || new widget_1.Widget();
             }
             widget.tag_name = widget.tag_name || "div";
             let attr = ContentBuilder.buildAttributes(widgetDef.attributes);
@@ -110,7 +117,12 @@ class ContentBuilder {
         let content = ``;
         sections.forEach(section => {
             section.tag_name = section.tag_name || "section";
-            let widgetContent = '';
+            section.attributes = section.attributes || [{
+                    "enabled": true,
+                    "key": "class",
+                    "value": "row"
+                }];
+            let widgetContent = "";
             let attr = ContentBuilder.buildAttributes(section.attributes);
             if (section.widget_definitions) {
                 widgetContent = this.buildWidgets(section.widget_definitions, fromDraft);

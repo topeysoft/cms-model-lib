@@ -1,3 +1,4 @@
+import { Attribute } from './sub-models/attribute';
 import { Section } from './section';
 import { WidgetDefinition } from './widget-definition';
 import { BaseModel } from "./base";
@@ -8,6 +9,7 @@ import { Widget } from "./widget";
 
 export class Page extends BaseModel {
     project_id:string;
+    attributes: Attribute[];
     metadata: TagElement[];
     styles: StyleElement[];
     scripts: ScriptElement[];

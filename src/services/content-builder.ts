@@ -1,6 +1,6 @@
-import { Section } from './../section';
-import { WidgetDefinition } from './../widget-definition';
-import { GridDefinition } from './../sub-models/grid-definition';
+import { Section } from "./../section";
+import { WidgetDefinition } from "./../widget-definition";
+import { GridDefinition } from "./../sub-models/grid-definition";
 import { Theme } from "./../theme";
 import { Page } from "./../page";
 import { SiteApp } from "./../site-app";
@@ -35,20 +35,29 @@ export class ContentBuilder {
     const scripts = ContentBuilder.buildTagElements(
       data.theme.scripts.concat(data.page.scripts)
     );
-    const bodyContent = ContentBuilder.buildSections(data.page.sections, data.is_draft);
-
+    const bodyContent = ContentBuilder.buildSections(
+      data.page.sections,
+      data.is_draft
+    );
+    let title = this.buildTitle(data);
+    let bodyTagAttributes = this.buildAttributes(data.page.attributes);
     const content = `<html>
       <head>
-      <title>Test</title>
+      ${title}
       ${metadata}
       ${styles}
       </head>
-      <body>
+      <body ${bodyTagAttributes}>
       ${bodyContent}
       </body>
       ${scripts}
       </html>`;
     return content;
+  }
+
+  static buildTitle(data) {
+    let title = `${data.page.title} | ${data.site_info.title}`;
+    return `<title>${title}</title>`;
   }
 
   static buildAttributes(attributes) {
@@ -64,7 +73,9 @@ export class ContentBuilder {
   static buildTagElements(tags) {
     let tagString = "";
     tags.forEach(item => {
-      if(!item.tag_name){ return}
+      if (!item.tag_name) {
+        return;
+      }
       let str = `<${item.tag_name} ${ContentBuilder.buildAttributes(
         item.attributes
       )}>`;
@@ -77,7 +88,7 @@ export class ContentBuilder {
   }
   static buildWidgetGridAttributes(widgetDef) {
     widgetDef = widgetDef || {};
-    const def = widgetDef.grid_definition|| new GridDefinition;
+    const def = widgetDef.grid_definition || new GridDefinition();
     const keys = Object.keys(def);
     let gridClasses = "";
     keys.forEach(key => {
@@ -89,7 +100,7 @@ export class ContentBuilder {
   }
   static buildVisualWidgetGridAttributes(widget) {
     widget = widget || {};
-    const def = widget.grid_definition|| new GridDefinition;
+    const def = widget.grid_definition || new GridDefinition();
     const keys = Object.keys(def);
     let gridClasses = "";
     keys.forEach(key => {
@@ -100,15 +111,16 @@ export class ContentBuilder {
     return gridClasses;
   }
 
-  static buildWidgets(widgetDefs: WidgetDefinition[], fromDraft?:boolean) {
+  static buildWidgets(widgetDefs: WidgetDefinition[], fromDraft?: boolean) {
     widgetDefs = widgetDefs || [];
     let content = ``;
     widgetDefs.forEach(widgetDef => {
-      widgetDef.widget = widgetDef.widget || new Widget;
-    let widget = widgetDef.widget;
-    if(fromDraft){
-      widget = widgetDef.widget.draft  || new Widget;
-    }
+      widgetDef.widget = widgetDef.widget || new Widget();
+      let widget = widgetDef.widget;
+      console.log(widgetDef.widget);
+      if (fromDraft) {
+        widget = widgetDef.widget.draft || new Widget();
+      }
       widget.tag_name = widget.tag_name || "div";
       let attr = ContentBuilder.buildAttributes(widgetDef.attributes);
       if (!attr.includes('class="')) {
@@ -122,15 +134,23 @@ export class ContentBuilder {
     });
     return content;
   }
-  static buildSections(sections: Section[], fromDraft?:boolean) {
+  static buildSections(sections: Section[], fromDraft?: boolean) {
     sections = sections || [];
     let content = ``;
     sections.forEach(section => {
       section.tag_name = section.tag_name || "section";
-      let widgetContent = '';
+      section.attributes = section.attributes || [{
+        "enabled":true,
+        "key":"class",
+        "value":"row"
+      }];
+      let widgetContent = "";
       let attr = ContentBuilder.buildAttributes(section.attributes);
-      if(section.widget_definitions){
-        widgetContent = this.buildWidgets(section.widget_definitions, fromDraft);
+      if (section.widget_definitions) {
+        widgetContent = this.buildWidgets(
+          section.widget_definitions,
+          fromDraft
+        );
       }
       content += `<${section.tag_name} ${attr}>${widgetContent}</${section.tag_name}>`;
     });
