@@ -11,4 +11,5 @@ export class Widget extends BaseModel {
     script: ScriptElement;
     style: StyleElement;
     read_only: boolean;
+    page_ids: [string];
 }
