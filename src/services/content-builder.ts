@@ -70,19 +70,30 @@ export class ContentBuilder {
     });
     return str;
   }
+  static buildTagElement(tag) {
+    if(!tag){
+      return '';
+    }
+    let tagString = "";
+    if (!tag.tag_name) {
+      return;
+    }
+    tagString = `<${tag.tag_name} ${ContentBuilder.buildAttributes(
+      tag.attributes
+    )}>`;
+    if (!tag.self_closing || tag.content) {
+      tagString += `${tag.content?tag.content:''}</${tag.tag_name}>`;
+    }
+    return tagString;
+  }
   static buildTagElements(tags) {
+    if(!tags){
+      return '';
+    }
     let tagString = "";
     tags.forEach(item => {
-      if (!item.tag_name) {
-        return;
-      }
-      let str = `<${item.tag_name} ${ContentBuilder.buildAttributes(
-        item.attributes
-      )}>`;
-      if (!item.self_closing || item.content) {
-        str += `${item.content}</${item.tag_name}>`;
-      }
-      tagString += str;
+      
+      tagString += ContentBuilder.buildTagElement(item);
     });
     return tagString;
   }
@@ -152,7 +163,12 @@ export class ContentBuilder {
           fromDraft
         );
       }
-      content += `<${section.tag_name} ${attr}>${widgetContent}</${section.tag_name}>`;
+      let sectionContent = widgetContent;
+      // if(!section.no_inner_container){
+      //   const section_wrapper =  {tag_name:'div', content: widgetContent, self_closing:false, attributes:[{enabled:true, key:'class', value:'container-fluid'}]};
+      //   sectionContent = this.buildTagElement(section_wrapper);
+      // }
+      content += `<${section.tag_name} ${attr}>${sectionContent}</${section.tag_name}>`;
     });
     return content;
   }
