@@ -45,8 +45,11 @@ class ContentBuilder {
         return `<title>${title}</title>`;
     }
     static buildAttributes(attributes) {
-        if (!attributes) {
-            attributes = [];
+        attributes = attributes || [];
+        const type = typeof (attributes);
+        console.log('TYPE', type);
+        if (!Array.isArray(attributes)) {
+            attributes = [attributes];
         }
         let str = "";
         try {
