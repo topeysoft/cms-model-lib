@@ -45,7 +45,9 @@ class ContentBuilder {
         return `<title>${title}</title>`;
     }
     static buildAttributes(attributes) {
-        attributes = attributes || [];
+        if (!attributes) {
+            attributes = [];
+        }
         let str = "";
         try {
             attributes.forEach(attr => {

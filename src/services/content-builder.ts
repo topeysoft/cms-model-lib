@@ -61,7 +61,9 @@ export class ContentBuilder {
   }
 
   static buildAttributes(attributes) {
-    attributes = attributes || [];
+    if(!attributes){
+      attributes = [];
+    } 
     let str = "";
     try {
 
