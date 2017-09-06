@@ -8,7 +8,7 @@ import { ContentData } from "./../content-data";
 import { Widget } from "../widget";
 
 export class ContentBuilder {
-  constructor() {}
+  constructor() { }
   static buildPreview(data: ContentData) {
     data.site_info = data.site_info || new SiteApp();
     data.page = data.page || new Page();
@@ -63,6 +63,7 @@ export class ContentBuilder {
   static buildAttributes(attributes) {
     attributes = attributes || [];
     let str = "";
+    console.log('Attrib', attributes);
     attributes.forEach(attr => {
       if (attr.enabled) {
         str += `${attr.key}="${attr.value}" `;
@@ -71,7 +72,7 @@ export class ContentBuilder {
     return str;
   }
   static buildTagElement(tag) {
-    if(!tag){
+    if (!tag) {
       return '';
     }
     let tagString = "";
@@ -82,17 +83,17 @@ export class ContentBuilder {
       tag.attributes
     )}>`;
     if (!tag.self_closing || tag.content) {
-      tagString += `${tag.content?tag.content:''}</${tag.tag_name}>`;
+      tagString += `${tag.content ? tag.content : ''}</${tag.tag_name}>`;
     }
     return tagString;
   }
   static buildTagElements(tags) {
-    if(!tags){
+    if (!tags) {
       return '';
     }
     let tagString = "";
     tags.forEach(item => {
-      
+
       tagString += ContentBuilder.buildTagElement(item);
     });
     return tagString;
@@ -151,9 +152,9 @@ export class ContentBuilder {
     sections.forEach(section => {
       section.tag_name = section.tag_name || "section";
       section.attributes = section.attributes || [{
-        "enabled":true,
-        "key":"class",
-        "value":"row"
+        "enabled": true,
+        "key": "class",
+        "value": "row"
       }];
       let widgetContent = "";
       let attr = ContentBuilder.buildAttributes(section.attributes);
