@@ -63,12 +63,16 @@ export class ContentBuilder {
   static buildAttributes(attributes) {
     attributes = attributes || [];
     let str = "";
-    console.log('Attrib', attributes);
-    attributes.forEach(attr => {
-      if (attr.enabled) {
-        str += `${attr.key}="${attr.value}" `;
-      }
-    });
+    try {
+
+      attributes.forEach(attr => {
+        if (attr.enabled) {
+          str += `${attr.key}="${attr.value}" `;
+        }
+      });
+    } catch (err) {
+      console.log('Attrib error', err, attributes);
+    }
     return str;
   }
   static buildTagElement(tag) {
