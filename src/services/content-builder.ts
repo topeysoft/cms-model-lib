@@ -119,10 +119,10 @@ export class ContentBuilder {
     let gridClasses = "";
     keys.forEach(key => {
       const attr = def[key];
-      let visibility = ` d-${key}-${def[key].display} `;
+      let visibility = def[key].display?` d-${key}-${def[key].display} `:' ';
       let gd = ` col-${key}-${attr.size} ${visibility} `;
       if(key==='xs'){
-        visibility = ` d-${def[key].display} `;
+        visibility = def[key].display?` d-${def[key].display} `:' ';
         gd = ` col-${attr.size} ${visibility} `;
       }
       gridClasses += gd;
@@ -136,10 +136,10 @@ export class ContentBuilder {
     let gridClasses = "";
     keys.forEach(key => {
       const attr = def[key];
-      let visibility = ` vc-d-${key}-${def[key].display} `;
+      let visibility = def[key].display?` vc-d-${key}-${def[key].display} `:' ';
       let gd = ` vc-col-${key}-${attr.size} ${visibility} `;
       if(key==='xs'){
-        visibility = ` vc-d-${def[key].display} `;
+        visibility = def[key].display?` vc-d-${def[key].display} `:' ';
         gd = ` vc-col-${attr.size} ${visibility} `;
       }    
       gridClasses+=gd;
