@@ -115,11 +115,12 @@ export class ContentBuilder {
     keys.forEach(key => {
       const attr = def[key];
       let visibility = attr.hidden ? ` d-${key}-none` : ` `;
-      gridClasses += ` col-${key}-${attr.size} ${visibility}`;
+      let gd = ` col-${key}-${attr.size} ${visibility}`;
       if(key==='xs'){
         visibility = attr.hidden ? ` d-none ` : ` `;
-        gridClasses += ` col-${attr.size} ${visibility}`;
+        gd = ` col-${attr.size} ${visibility}`;
       }
+      gridClasses += gd;
     });
     return gridClasses;
   }
@@ -131,11 +132,13 @@ export class ContentBuilder {
     keys.forEach(key => {
       const attr = def[key];
       let visibility = attr.hidden ? ` vc-d-${key}-none` : ` `;
-      gridClasses += ` vc-col-${key}-${attr.size} ${visibility}`;
+      let gd = ` vc-col-${key}-${attr.size} ${visibility}`;
       if(key==='xs'){
         visibility = attr.hidden ? ` vc-d-none ` : ` `;
-        gridClasses += ` vc-col-${attr.size} ${visibility}`;
-      }    });
+        gd = ` vc-col-${attr.size} ${visibility}`;
+      }    
+      gridClasses+=gd;
+    });
     return gridClasses;
   }
 
