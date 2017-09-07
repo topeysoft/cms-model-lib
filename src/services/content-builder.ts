@@ -114,8 +114,12 @@ export class ContentBuilder {
     let gridClasses = "";
     keys.forEach(key => {
       const attr = def[key];
-      const visibility = attr.hidden ? ` hidden-${key} ` : ` `;
+      let visibility = attr.hidden ? ` d-${key}-none` : ` `;
       gridClasses += ` col-${key}-${attr.size} ${visibility}`;
+      if(key==='xs'){
+        visibility = attr.hidden ? ` d-none ` : ` `;
+        gridClasses += ` col-${attr.size} ${visibility}`;
+      }
     });
     return gridClasses;
   }
@@ -126,9 +130,12 @@ export class ContentBuilder {
     let gridClasses = "";
     keys.forEach(key => {
       const attr = def[key];
-      const visibility = attr.hidden ? ` vc-hidden-${key} ` : ``;
-      gridClasses += `vc-${key}-${attr.size} ${visibility}`;
-    });
+      let visibility = attr.hidden ? ` vc-d-${key}-none` : ` `;
+      gridClasses += ` vc-col-${key}-${attr.size} ${visibility}`;
+      if(key==='xs'){
+        visibility = attr.hidden ? ` vc-d-none ` : ` `;
+        gridClasses += ` vc-col-${attr.size} ${visibility}`;
+      }    });
     return gridClasses;
   }
 
