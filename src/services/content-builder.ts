@@ -63,19 +63,24 @@ export class ContentBuilder {
   static buildAttributes(attributes) {
     attributes = attributes || [];
     const type = typeof (attributes);
-    console.log('TYPE', type);
-    if(!Array.isArray(attributes)){
-      attributes = [attributes];
-    }
     let str = "";
     try {
-
+      if(attributes.forEach){
       attributes.forEach(attr => {
         if (attr.enabled) {
           str += `${attr.key}="${attr.value}" `;
         }
       });
-    } catch (err) {
+          }else{
+              Object.keys(attributes).forEach(key => {
+                  let attr = attributes[key];
+              if (attr.enabled) {
+              str += `${attr.key}="${attr.value}" `;
+              }
+          });
+          
+      }
+       } catch (err) {
       console.log('Attrib error', err, attributes);
     }
     return str;
@@ -114,11 +119,11 @@ export class ContentBuilder {
     let gridClasses = "";
     keys.forEach(key => {
       const attr = def[key];
-      let visibility = attr.hidden ? ` d-${key}-none` : ` `;
-      let gd = ` col-${key}-${attr.size} ${visibility}`;
+      let visibility = ` d-${key}-${def[key].display} `;
+      let gd = ` col-${key}-${attr.size} ${visibility} `;
       if(key==='xs'){
-        visibility = attr.hidden ? ` d-none ` : ` `;
-        gd = ` col-${attr.size} ${visibility}`;
+        visibility = ` d-${def[key].display} `;
+        gd = ` col-${attr.size} ${visibility} `;
       }
       gridClasses += gd;
     });
@@ -131,11 +136,11 @@ export class ContentBuilder {
     let gridClasses = "";
     keys.forEach(key => {
       const attr = def[key];
-      let visibility = attr.hidden ? ` vc-d-${key}-none` : ` `;
-      let gd = ` vc-col-${key}-${attr.size} ${visibility}`;
+      let visibility = ` vc-d-${key}-${def[key].display} `;
+      let gd = ` vc-col-${key}-${attr.size} ${visibility} `;
       if(key==='xs'){
-        visibility = attr.hidden ? ` vc-d-none ` : ` `;
-        gd = ` vc-col-${attr.size} ${visibility}`;
+        visibility = ` vc-d-${def[key].display} `;
+        gd = ` vc-col-${attr.size} ${visibility} `;
       }    
       gridClasses+=gd;
     });
