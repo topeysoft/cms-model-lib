@@ -1,5 +1,5 @@
 export class GridDefinitionItem {
-    size: number = 12;
+    size: any = null;
     display?: string;
     hidden?: boolean = false;
 }

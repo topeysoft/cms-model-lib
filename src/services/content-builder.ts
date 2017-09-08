@@ -112,39 +112,33 @@ export class ContentBuilder {
     });
     return tagString;
   }
-  static buildWidgetGridAttributes(widgetDef) {
+  static buildWidgetGridAttributes(widgetDef, prefix='') {
     widgetDef = widgetDef || {};
     const def = widgetDef.grid_definition || new GridDefinition();
     const keys = Object.keys(def);
     let gridClasses = "";
     keys.forEach(key => {
       const attr = def[key];
-      let visibility = def[key].display?` d-${key}-${def[key].display} `:' ';
-      let gd = ` col-${key}-${attr.size} ${visibility} `;
+      let visibility = def[key].display?` ${prefix}d-${key}-${def[key].display} `:' ';
+      let col = `${prefix}col`;
+      if(attr[key].size){
+        col = `${prefix}col-${key}-${attr.size}`;
+      }
+      let gd = ` ${col} ${visibility} `;
       if(key==='xs'){
-        visibility = def[key].display?` d-${def[key].display} `:' ';
-        gd = ` col-${attr.size} ${visibility} `;
+        visibility = def[key].display?` ${prefix}d-${def[key].display} `:' ';
+        let col = `${prefix}col`;
+        if(attr[key].size){
+          col = `${prefix}col-${attr.size}`;
+        }
+        gd = ` ${col} ${visibility} `;
       }
       gridClasses += gd;
     });
     return gridClasses;
   }
-  static buildVisualWidgetGridAttributes(widget) {
-    widget = widget || {};
-    const def = widget.grid_definition || new GridDefinition();
-    const keys = Object.keys(def);
-    let gridClasses = "";
-    keys.forEach(key => {
-      const attr = def[key];
-      let visibility = def[key].display?` vc-d-${key}-${def[key].display} `:' ';
-      let gd = ` vc-col-${key}-${attr.size} ${visibility} `;
-      if(key==='xs'){
-        visibility = def[key].display?` vc-d-${def[key].display} `:' ';
-        gd = ` vc-col-${attr.size} ${visibility} `;
-      }    
-      gridClasses+=gd;
-    });
-    return gridClasses;
+  static buildVisualWidgetGridAttributes(widgetDef) {
+    return this.buildWidgetGridAttributes(widgetDef, 'vc-');
   }
 
   static buildWidgets(widgetDefs: WidgetDefinition[], fromDraft?: boolean) {

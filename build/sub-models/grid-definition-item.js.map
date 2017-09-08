@@ -1,1 +1,1 @@
-{"version":3,"file":"grid-definition-item.js","sourceRoot":"./src/","sources":["sub-models/grid-definition-item.ts"],"names":[],"mappings":";;AAAA;IAAA;QACI,SAAI,GAAW,EAAE,CAAC;QAElB,WAAM,GAAa,KAAK,CAAC;IAC7B,CAAC;CAAA;AAJD,gDAIC"}
+{"version":3,"file":"grid-definition-item.js","sourceRoot":"./src/","sources":["sub-models/grid-definition-item.ts"],"names":[],"mappings":";;AAAA;IAAA;QACI,SAAI,GAAQ,IAAI,CAAC;QAEjB,WAAM,GAAa,KAAK,CAAC;IAC7B,CAAC;CAAA;AAJD,gDAIC"}
