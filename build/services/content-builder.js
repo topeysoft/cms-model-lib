@@ -103,14 +103,14 @@ class ContentBuilder {
             const attr = def[key];
             let visibility = def[key].display ? ` ${prefix}d-${key}-${def[key].display} ` : ' ';
             let col = `${prefix}col`;
-            if (attr[key].size) {
+            if (attr[key] && attr[key].size) {
                 col = `${prefix}col-${key}-${attr.size}`;
             }
             let gd = ` ${col} ${visibility} `;
             if (key === 'xs') {
                 visibility = def[key].display ? ` ${prefix}d-${def[key].display} ` : ' ';
                 let col = `${prefix}col`;
-                if (attr[key].size) {
+                if (attr[key] && attr[key].size) {
                     col = `${prefix}col-${attr.size}`;
                 }
                 gd = ` ${col} ${visibility} `;
