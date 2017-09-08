@@ -10,6 +10,6 @@ export class Section {
     unique_name:string = shortid();
     tag_name:string = 'section';
     attributes:[Attribute] = [{enabled:true, key:'class',value:'row'}];    
-    no_inner_container = false;
+    // no_inner_container = false;
     widget_definitions: WidgetDefinition[];
 }

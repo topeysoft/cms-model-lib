@@ -6,7 +6,6 @@ class Section {
         this.unique_name = shortid();
         this.tag_name = 'section';
         this.attributes = [{ enabled: true, key: 'class', value: 'row' }];
-        this.no_inner_container = false;
     }
 }
 exports.Section = Section;
