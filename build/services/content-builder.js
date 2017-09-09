@@ -5,6 +5,7 @@ const theme_1 = require("./../theme");
 const page_1 = require("./../page");
 const site_app_1 = require("./../site-app");
 const widget_1 = require("../widget");
+const index_1 = require("../index");
 class ContentBuilder {
     constructor() { }
     static buildPreview(data) {
@@ -19,6 +20,12 @@ class ContentBuilder {
         data.site_info.metadata = data.site_info.metadata || [];
         data.page.metadata = data.page.metadata || [];
         data.theme.metadata = data.theme.metadata || [];
+        if (data.page.requre_user_login) {
+            const sc = new index_1.ScriptElement;
+            sc.tag_name = 'script';
+            sc.content = 'window.requireUserLogin = true;';
+            data.page.scripts.push(sc);
+        }
         const styles = ContentBuilder.buildTagElements(data.theme.styles.concat(data.page.styles));
         const metadata = ContentBuilder.buildTagElements(data.theme.metadata
             .concat(data.page.metadata)

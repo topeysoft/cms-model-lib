@@ -6,6 +6,7 @@ import { Page } from "./../page";
 import { SiteApp } from "./../site-app";
 import { ContentData } from "./../content-data";
 import { Widget } from "../widget";
+import { ScriptElement } from "../index";
 
 export class ContentBuilder {
   constructor() { }
@@ -24,6 +25,12 @@ export class ContentBuilder {
     data.site_info.metadata = data.site_info.metadata || [];
     data.page.metadata = data.page.metadata || [];
     data.theme.metadata = data.theme.metadata || [];
+    if(data.page.requre_user_login){
+      const sc = new ScriptElement;
+      sc.tag_name ='script';
+      sc.content ='window.requireUserLogin = true;';
+      data.page.scripts.push(sc);
+    }
     const styles = ContentBuilder.buildTagElements(
       data.theme.styles.concat(data.page.styles)
     );
