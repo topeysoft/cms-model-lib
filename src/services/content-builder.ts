@@ -25,7 +25,7 @@ export class ContentBuilder {
     data.site_info.metadata = data.site_info.metadata || [];
     data.page.metadata = data.page.metadata || [];
     data.theme.metadata = data.theme.metadata || [];
-    if(data.page.requre_user_login){
+    if(data.page.require_user_login){
       const sc = new ScriptElement;
       sc.tag_name ='script';
       sc.content ='window.requireUserLogin = true;';

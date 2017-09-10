@@ -16,6 +16,6 @@ export class Page extends BaseModel {
     styles: StyleElement[];
     scripts: ScriptElement[];
     sections: Section[];
-    requre_user_login: boolean = false;
+    require_user_login: boolean = false;
 }
 
