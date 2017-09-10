@@ -161,8 +161,13 @@ class ContentBuilder {
                 }];
             let widgetContent = "";
             let attr = ContentBuilder.buildAttributes(section.attributes);
-            if (section.widget_definitions) {
-                widgetContent = this.buildWidgets(section.widget_definitions, fromDraft);
+            if (section.is_global) {
+                widgetContent = section.content;
+            }
+            else {
+                if (section.widget_definitions) {
+                    widgetContent = this.buildWidgets(section.widget_definitions, fromDraft);
+                }
             }
             let sectionContent = widgetContent;
             content += `<${section.tag_name} ${attr}>${sectionContent}</${section.tag_name}>`;
