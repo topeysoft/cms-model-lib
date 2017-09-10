@@ -11,5 +11,6 @@ export class Section {
     tag_name:string = 'section';
     attributes:[Attribute] = [{enabled:true, key:'class',value:'row'}];    
     // no_inner_container = false;
+    is_global = false;
     widget_definitions: WidgetDefinition[];
 }
