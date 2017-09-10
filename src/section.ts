@@ -7,10 +7,12 @@ import * as shortid from "shortid";
 import { WidgetDefinition } from "./index";
 
 export class Section {
+    _id:string;
+    project_id:string;
     unique_name:string = shortid();
     tag_name:string = 'section';
     attributes:[Attribute] = [{enabled:true, key:'class',value:'row'}];    
-    // no_inner_container = false;
+    content: string;
     is_global = false;
     widget_definitions: WidgetDefinition[];
 }
