@@ -13,7 +13,7 @@ export class ContentBuilder {
   static buildPreview(data: ContentData) {
     return ContentBuilder.buildContent(data, true);
   }
-  static buildContent(contentData: ContentData, fromDraft: boolean = false) {
+  static buildContent(contentData: ContentData, fromDraft = false) {
     contentData.site_info = contentData.site_info || new SiteApp();
     contentData.site_info.scripts = contentData.site_info.scripts || [];
     contentData.site_info.metadata = contentData.site_info.metadata || [];
