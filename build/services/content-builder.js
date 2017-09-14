@@ -147,7 +147,6 @@ class ContentBuilder {
         widgetDefs.forEach(widgetDef => {
             widgetDef.widget = widgetDef.widget || new widget_1.Widget();
             let widget = widgetDef.widget;
-            console.log(widgetDef.widget);
             if (fromDraft) {
                 widget = widgetDef.widget.draft || new widget_1.Widget();
             }
