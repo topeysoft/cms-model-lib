@@ -9,17 +9,29 @@ const index_1 = require("../index");
 class ContentBuilder {
     constructor() { }
     static buildPreview(data) {
-        data.site_info = data.site_info || new site_app_1.SiteApp();
-        data.page = data.page || new page_1.Page();
-        data.theme = data.theme || new theme_1.Theme();
-        data.theme.styles = data.theme.styles || [];
-        data.page.styles = data.page.styles || [];
-        data.theme.scripts = data.theme.scripts || [];
-        data.page.scripts = data.page.scripts || [];
-        data.site_info.scripts = data.site_info.scripts || [];
-        data.site_info.metadata = data.site_info.metadata || [];
-        data.page.metadata = data.page.metadata || [];
-        data.theme.metadata = data.theme.metadata || [];
+        return ContentBuilder.buildContent(data, true);
+    }
+    static buildContent(contentData, fromDraft = false) {
+        contentData.site_info = contentData.site_info || new site_app_1.SiteApp();
+        contentData.site_info.scripts = contentData.site_info.scripts || [];
+        contentData.site_info.metadata = contentData.site_info.metadata || [];
+        contentData.theme = contentData.theme || new theme_1.Theme();
+        contentData.theme.styles = contentData.theme.styles || [];
+        contentData.theme.scripts = contentData.theme.scripts || [];
+        contentData.theme.metadata = contentData.theme.metadata || [];
+        let data = Object.assign({}, contentData);
+        if (fromDraft) {
+            data.page = contentData.page.draft || new page_1.Page();
+            data.page.styles = contentData.page.draft.styles || [];
+            data.page.scripts = contentData.page.draft.scripts || [];
+            data.page.metadata = contentData.page.draft.metadata || [];
+        }
+        else {
+            data.page = data.page || new page_1.Page();
+            data.page.styles = data.page.styles || [];
+            data.page.scripts = data.page.scripts || [];
+            data.page.metadata = data.page.metadata || [];
+        }
         if (data.page.require_user_login) {
             const sc = new index_1.ScriptElement;
             sc.tag_name = 'script';
@@ -31,7 +43,7 @@ class ContentBuilder {
             .concat(data.page.metadata)
             .concat(data.site_info.metadata));
         const scripts = ContentBuilder.buildTagElements(data.theme.scripts.concat(data.page.scripts));
-        const bodyContent = ContentBuilder.buildSections(data.page.sections, data.is_draft);
+        const bodyContent = ContentBuilder.buildSections(data.page.sections, fromDraft);
         let title = this.buildTitle(data);
         let bodyTagAttributes = this.buildAttributes(data.page.attributes);
         const content = `<html>

@@ -11,24 +11,35 @@ import { ScriptElement } from "../index";
 export class ContentBuilder {
   constructor() { }
   static buildPreview(data: ContentData) {
-    data.site_info = data.site_info || new SiteApp();
-    data.page = data.page || new Page();
-    data.theme = data.theme || new Theme();
+    return ContentBuilder.buildContent(data, true);
+  }
+  static buildContent(contentData: ContentData, fromDraft: boolean = false) {
+    contentData.site_info = contentData.site_info || new SiteApp();
+    contentData.site_info.scripts = contentData.site_info.scripts || [];
+    contentData.site_info.metadata = contentData.site_info.metadata || [];
 
-    data.theme.styles = data.theme.styles || [];
-    data.page.styles = data.page.styles || [];
+    contentData.theme = contentData.theme || new Theme();
+    contentData.theme.styles = contentData.theme.styles || [];
+    contentData.theme.scripts = contentData.theme.scripts || [];
+    contentData.theme.metadata = contentData.theme.metadata || [];
 
-    data.theme.scripts = data.theme.scripts || [];
-    data.page.scripts = data.page.scripts || [];
-    data.site_info.scripts = data.site_info.scripts || [];
+    let data = Object.assign({}, contentData);
+    if (fromDraft) {
+      data.page = contentData.page.draft || new Page();
+      data.page.styles = contentData.page.draft.styles || [];
+      data.page.scripts = contentData.page.draft.scripts || [];
+      data.page.metadata = contentData.page.draft.metadata || [];
+    } else {
+      data.page = data.page || new Page();
+      data.page.styles = data.page.styles || [];
+      data.page.scripts = data.page.scripts || [];
+      data.page.metadata = data.page.metadata || [];
+    }
 
-    data.site_info.metadata = data.site_info.metadata || [];
-    data.page.metadata = data.page.metadata || [];
-    data.theme.metadata = data.theme.metadata || [];
-    if(data.page.require_user_login){
+    if (data.page.require_user_login) {
       const sc = new ScriptElement;
-      sc.tag_name ='script';
-      sc.content ='window.requireUserLogin = true;';
+      sc.tag_name = 'script';
+      sc.content = 'window.requireUserLogin = true;';
       data.page.scripts.push(sc);
     }
     const styles = ContentBuilder.buildTagElements(
@@ -44,7 +55,7 @@ export class ContentBuilder {
     );
     const bodyContent = ContentBuilder.buildSections(
       data.page.sections,
-      data.is_draft
+      fromDraft
     );
     let title = this.buildTitle(data);
     let bodyTagAttributes = this.buildAttributes(data.page.attributes);
@@ -72,22 +83,22 @@ export class ContentBuilder {
     const type = typeof (attributes);
     let str = "";
     try {
-      if(attributes.forEach){
-      attributes.forEach(attr => {
-        if (attr.enabled) {
-          str += `${attr.key}="${attr.value}" `;
-        }
-      });
-          }else{
-              Object.keys(attributes).forEach(key => {
-                  let attr = attributes[key];
-              if (attr.enabled) {
-              str += `${attr.key}="${attr.value}" `;
-              }
-          });
-          
+      if (attributes.forEach) {
+        attributes.forEach(attr => {
+          if (attr.enabled) {
+            str += `${attr.key}="${attr.value}" `;
+          }
+        });
+      } else {
+        Object.keys(attributes).forEach(key => {
+          let attr = attributes[key];
+          if (attr.enabled) {
+            str += `${attr.key}="${attr.value}" `;
+          }
+        });
+
       }
-       } catch (err) {
+    } catch (err) {
       console.log('Attrib error', err, attributes);
     }
     return str;
@@ -119,23 +130,23 @@ export class ContentBuilder {
     });
     return tagString;
   }
-  static buildWidgetGridAttributes(widgetDef, prefix='') {
+  static buildWidgetGridAttributes(widgetDef, prefix = '') {
     widgetDef = widgetDef || {};
     const def = widgetDef.grid_definition || new GridDefinition();
     const keys = Object.keys(def);
     let gridClasses = "";
     keys.forEach(key => {
       const attr = def[key];
-      let visibility = def[key].display?` ${prefix}d-${key}-${def[key].display} `:' ';
+      let visibility = def[key].display ? ` ${prefix}d-${key}-${def[key].display} ` : ' ';
       let col = `${prefix}col`;
-      if(attr[key] && attr[key].size){
+      if (attr[key] && attr[key].size) {
         col = `${prefix}col-${key}-${attr.size}`;
       }
       let gd = ` ${col} ${visibility} `;
-      if(key==='xs'){
-        visibility = def[key].display?` ${prefix}d-${def[key].display} `:' ';
+      if (key === 'xs') {
+        visibility = def[key].display ? ` ${prefix}d-${def[key].display} ` : ' ';
         let col = `${prefix}col`;
-        if(attr[key] && attr[key].size){
+        if (attr[key] && attr[key].size) {
           col = `${prefix}col-${attr.size}`;
         }
         gd = ` ${col} ${visibility} `;
@@ -185,7 +196,7 @@ export class ContentBuilder {
       let attr = ContentBuilder.buildAttributes(section.attributes);
       if (section.is_global) {
         widgetContent = section.content
-      }else{
+      } else {
         if (section.widget_definitions) {
           widgetContent = this.buildWidgets(
             section.widget_definitions,
