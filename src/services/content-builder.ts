@@ -25,8 +25,11 @@ export class ContentBuilder {
 
       const project_id_global_script = new ScriptElement;
       project_id_global_script.tag_name = 'script';
+      project_id_global_script.attributes = [
+        {enabled:true, key:'type', value:'text/javascript'}
+      ];
       project_id_global_script.render_in_head = true;
-      project_id_global_script.content = `let project_id = project_id || '${contentData.site_info._id}';`;
+      project_id_global_script.content = `let project_id = '${contentData.site_info._id}';`;
       contentData.theme.scripts.splice(0, 0 ,project_id_global_script);
 
     let data = Object.assign({}, contentData);
