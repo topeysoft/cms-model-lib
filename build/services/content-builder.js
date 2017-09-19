@@ -19,14 +19,20 @@ class ContentBuilder {
         contentData.theme.styles = contentData.theme.styles || [];
         contentData.theme.scripts = contentData.theme.scripts || [];
         contentData.theme.metadata = contentData.theme.metadata || [];
-        const project_id_global_script = new index_1.ScriptElement;
-        project_id_global_script.tag_name = 'script';
-        project_id_global_script.attributes = [
-            { enabled: true, key: 'type', value: 'text/javascript' }
-        ];
-        project_id_global_script.render_in_head = true;
-        project_id_global_script.content = `window.project_id = window.project_id || '${contentData.site_info._id}';`;
-        contentData.theme.scripts.splice(0, 0, project_id_global_script);
+        const project_id_global_script_identifier = `${contentData.site_info._id}_global_project_identifier`;
+        if (contentData.theme.scripts.findIndex(sc => {
+            return sc.identifier === project_id_global_script_identifier;
+        }) === -1) {
+            const project_id_global_script = new index_1.ScriptElement;
+            project_id_global_script.identifier = project_id_global_script_identifier;
+            project_id_global_script.tag_name = 'script';
+            project_id_global_script.attributes = [
+                { enabled: true, key: 'type', value: 'text/javascript' }
+            ];
+            project_id_global_script.render_in_head = true;
+            project_id_global_script.content = `window.project_id = window.project_id || '${contentData.site_info._id}';`;
+            contentData.theme.scripts.splice(0, 0, project_id_global_script);
+        }
         let data = Object.assign({}, contentData);
         if (fromDraft) {
             data.page = contentData.page.draft || new page_1.Page();
